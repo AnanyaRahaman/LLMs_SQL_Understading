@@ -5,6 +5,6 @@ Function_Count, and predicate_count. These metrics help understand the structura
 of LLM performance on SQL tasks.
 ### Files Overview
 * sdss_stats.csv: Statistics for the Sloan Digital Sky Survey (SDSS) dataset queries.
-* sqlshare_stats.csv: Metrics for queries from the SQLShare dataset.
-* join-order_stats.csv: Analysis of queries from the Join-Order Benchmark.
+* sqlshare_stats.csv: Statistics for queries from the SQLShare dataset.
+* join-order_stats.csv: Statistics of queries from the Join-Order Benchmark.
 * spider_stats.csv: Statistical details for queries from the Spider Benchmark.
