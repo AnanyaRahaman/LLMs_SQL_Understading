@@ -25,7 +25,7 @@ and the query workload all play a role . Using publicly available
 query workloads, recent work has shown that more complex, longer
 queries with multiple joins and multiple predicate conditions incur
 higher execution costs.
-* Query equivalence: Two syntactically different queries are considered equivalent if they return the same result for all database
+* Query equivalence: Two syntactically different queries are considered equivalent if they return the same result for all database
 instances. This is important for query optimization, and
 query recommendation, where simpler query representations
 can facilitate faster execution times. We evaluate query equivalence
