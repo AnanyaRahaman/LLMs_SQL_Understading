@@ -1,4 +1,4 @@
-# Repository Overview
+# Folder Overview
 
 This repository includes essential components for our research on various tasks and datasets described in our paper. Below is an outline of the main contents:
 
@@ -22,11 +22,3 @@ This repository includes essential components for our research on various tasks 
 ## Purpose
 
 The `Tasks` directory provides data and scripts for specific research tasks, while the `Stats` directory includes aggregated data for comprehensive statistical analysis. The notebook `datasets_stats.ipynb` offers insights into the statistical methods and results presented in our academic paper.
-
-## Contributing
-
-Contributions to improve the scripts, data analysis, or documentation are welcome. Please fork this repository and submit pull requests with your suggested changes.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
