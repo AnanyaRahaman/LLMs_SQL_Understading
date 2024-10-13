@@ -1,4 +1,4 @@
-# Repository Overview
+# Folder Overview
 
 This repository contains several key components as outlined in the structure below:
 
@@ -17,11 +17,3 @@ This Jupyter notebook includes three sections of code:
 ### Purpose
 
 The purpose of this notebook is to showcase how to set up and interact with different language learning models (LLMs), providing practical examples for each listed model.
-
-## Contributing
-
-Feel free to fork this repository or submit pull requests to enhance the interactions with the models or expand the examples provided.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
