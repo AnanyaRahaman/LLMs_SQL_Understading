@@ -51,21 +51,21 @@ Due to page limitations in our paper, we were unable to include detailed discuss
      ```sql
      -- Original Query
      SELECT objID
-FROM PhotoObj
-WHERE objID IN (
-    SELECT objID
-    FROM PhotoTag
-    WHERE u > 18
+     FROM PhotoObj
+     WHERE objID IN (
+     SELECT objID
+     FROM PhotoTag
+     WHERE u > 18
 );
 
      
      -- Equivalent Query
      SELECT objID
-FROM PhotoTag
-WHERE u > 18
-AND objID IN (
-    SELECT objID
-    FROM PhotoObj
+     FROM PhotoTag
+     WHERE u > 18
+     AND objID IN (
+     SELECT objID
+     FROM PhotoObj
 );
 
      ```
