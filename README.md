@@ -1,6 +1,6 @@
 # Repository Overview
 
-This repository contains all the resources used and generated for our analysis of the effects of statistical properties on various SQL tasks using Language Learning Models (LLMs).
+This repository contains a collection of tools and datasets designed to evaluate the understanding of SQL queries by large language models (LLMs). Our focus is on various aspects of SQL processing, including syntax error detection, missing token identification, query performance prediction, and query equivalence checking and SQL to Test Conversion.
 
 ## Directory and File Descriptions
 
