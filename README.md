@@ -284,10 +284,11 @@ We also explored generating non-equivalent queries to further challenge the LLMs
    - **Example**:
      ```sql
      -- Original Query
-     SELECT department, AVG(salary) FROM employees GROUP BY department;
+     SELECT class, AVG(redshift) FROM SpecObj WHERE class = 'GALAXY' GROUP BY class;
      
      -- Non-equivalent Query
-     SELECT department, SUM(salary) FROM employees GROUP BY department;
+     SELECT class, SUM(redshift) FROM SpecObj WHERE class = 'GALAXY' GROUP BY class;
+
      ```
 
 2. **Changing Join Conditions** ("Change_Join_Condition")
@@ -295,10 +296,12 @@ We also explored generating non-equivalent queries to further challenge the LLMs
    - **Example**:
      ```sql
      -- Original Query
-     SELECT * FROM orders INNER JOIN customers ON orders.customer_id = customers.id;
+     SELECT p.objID, s.specObjID FROM PhotoObj AS p INNER JOIN SpecObj AS s ON p.objID = s.objID AND s.class = 'STAR';
+
      
      -- Non-equivalent Query
-     SELECT * FROM orders LEFT JOIN customers ON orders.customer_id = customers.id;
+     SELECT p.objID, s.specObjID FROM PhotoObj AS p LEFT JOIN SpecObj AS s ON p.objID = s.objID AND s.class = 'STAR';
+
      ```
 
 3. **Modifying Grouping Criteria** ("Group_by_Criteria")
@@ -306,10 +309,12 @@ We also explored generating non-equivalent queries to further challenge the LLMs
    - **Example**:
      ```sql
      -- Original Query
-     SELECT city, COUNT(*) FROM employees GROUP BY city;
+     SELECT fieldID, COUNT(*) FROM PhotoObj GROUP BY fieldID;
+
      
      -- Non-equivalent Query
-     SELECT state, city, COUNT(*) FROM employees GROUP BY state, city;
+     SELECT type, fieldID, COUNT(*) FROM PhotoObj GROUP BY type, fieldID;
+
      ```
 
 4. **Introducing Subtle Changes**
@@ -317,26 +322,26 @@ We also explored generating non-equivalent queries to further challenge the LLMs
    - **Logical Conditions Example**:
      ```sql
      -- Original Query
-     SELECT * FROM products WHERE price < 20 AND quantity > 100;
+     SELECT objID FROM PhotoObj WHERE type = 'GALAXY' AND ra > 180;
      
      -- Non-equivalent Query
-     SELECT * FROM products WHERE price < 20 OR quantity > 100;
+     SELECT objID FROM PhotoObj WHERE type = 'GALAXY' OR ra > 180;
      ```
    - **Changing Values Example**:
      ```sql
      -- Original Query
-     SELECT * FROM employees WHERE salary > 50000;
+     SELECT objID FROM PhotoObj WHERE mag_u < 18;
      
      -- Non-equivalent Query
-     SELECT * FROM employees WHERE salary > 500000;
+     SELECT objID FROM PhotoObj WHERE mag_u < 20;
      ```
    - **Operators Example**:
      ```sql
      -- Original Query
-     SELECT * FROM employees WHERE salary > 50000;
+     SELECT objID FROM PhotoObj WHERE mag_u > 18;
      
      -- Non-equivalent Query
-     SELECT * FROM employees WHERE salary >= 50000;
+     SELECT objID FROM PhotoObj WHERE mag_u < 18;
      ```
 
 5. **Changing Sorting and Limiting** ("Change_Sorting_Limiting")
@@ -344,10 +349,12 @@ We also explored generating non-equivalent queries to further challenge the LLMs
    - **Example**:
      ```sql
      -- Original Query
-     SELECT * FROM employees ORDER BY hire_date DESC LIMIT 10;
+     SELECT objID, ra FROM PhotoObj ORDER BY ra DESC LIMIT 10;
+
      
      -- Non-equivalent Query
-     SELECT * FROM employees ORDER BY hire_date ASC LIMIT 10;
+     SELECT objID, ra FROM PhotoObj ORDER BY ra ASC LIMIT 10;
+
      ```
 
 6. **Modifying Order By Criteria** ("Order_by_Column")
@@ -355,10 +362,11 @@ We also explored generating non-equivalent queries to further challenge the LLMs
    - **Example**:
      ```sql
      -- Original Query
-     SELECT city, COUNT(*) FROM employees Order BY city;
+     SELECT objID, ra FROM PhotoObj ORDER BY ra;
      
      -- Non-equivalent Query
-     SELECT state, city, COUNT(*) FROM employees Order BY state, city;
+     SELECT objID, dec FROM PhotoObj ORDER BY dec;
+
      ```
 
 7. **Ambiguous Column References and Table Name Changes**
@@ -366,22 +374,23 @@ We also explored generating non-equivalent queries to further challenge the LLMs
    - **Ambiguous Column References Example**:
      ```sql
      -- Original Query
-     SELECT EmployeeName, Department, Salary, HireDate, Position, Email
+     SELECT objID, ra, dec FROM PhotoObj;
+
      FROM Employees;
      
      -- Non Equivalent Query
-     SELECT EmployeeName, Department, Salary, HireDate, Position
+     SELECT objID, ra FROM PhotoObj;
+
      FROM Employees;
      ```
-   - **Change Table Name Example**:
+8. - **Change Table Name Example**:
      ```sql
      -- Original Query
-     SELECT EmployeeID, EmployeeName, Department, Salary
-     FROM Employees;
+     SELECT objID, ra FROM PhotoObj;
      
      -- Non Equivalent Query
-     SELECT EmployeeID, EmployeeName, Department, Salary
-     FROM Employee;
+     SELECT objID, ra FROM PhotoObject;
+
      ```
 
 These categories help in thoroughly evaluating the adaptability and accuracy of LLMs in SQL query manipulation and understanding.
