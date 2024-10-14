@@ -1,9 +1,20 @@
-# Overview
-This repository contains a collection of tools and datasets designed to evaluate the understanding of SQL queries by large language models (LLMs). Our focus is on various aspects of SQL processing, including syntax error detection, missing token identification, query performance prediction, and query equivalence checking and SQL to Test Conversion.
-### What's inside the repository:
-* Codes: Jupyter Notebooks with scripts for syntax error evaluation, missing token identification, and more.
-* Datasets: Includes datasets used for different SQL-related tasks to assess model performance.
+# Repository Overview
 
+This repository contains all the resources used and generated for our analysis of the effects of statistical properties on various SQL tasks using Language Learning Models (LLMs).
+
+## Directory and File Descriptions
+
+### Code
+This directory contains all the scripts and code used to conduct the analyses and generate the results documented in our paper. These scripts cover the evaluation of LLMs across different SQL tasks.
+
+### Datasets
+Here you will find the datasets used in our analysis, including SDSS, SQLShare, and Join-Order. These datasets serve as the basis for evaluating the LLMs' performance on various tasks.
+
+### README.md
+Provides an overview and general information about the repository's purpose and structure.
+
+### results.ipynb
+This Jupyter notebook presents the results of our analysis, showing the impact of statistical properties on SQL tasks such as Syntax Error Identification, Missing Token Identification, Performance Prediction, and Query Equivalence across different datasets. Results are shown for five LLMs: GPT-4, GPT-3.5, Llama3, Mistralai, and Gemini. While not all figures made it into the paper, those included best illustrate the significant relationships or their absence among the variables studied.
 
 # SQL Task Evaluation in LLMs
 
