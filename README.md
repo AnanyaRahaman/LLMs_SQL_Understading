@@ -56,6 +56,7 @@ Due to page limitations in our paper, we were unable to include detailed discuss
      SELECT objID
      FROM PhotoTag
      WHERE u > 18);
+
      -- Equivalent Query
      SELECT objID
      FROM PhotoTag
@@ -71,10 +72,16 @@ Due to page limitations in our paper, we were unable to include detailed discuss
    - **Example**:
      ```sql
      -- Original Query
-     SELECT first_name, last_name FROM employees, department WHERE department_id = 10;
+     SELECT p.objID, s.specObjID
+     FROM PhotoObj AS p, SpecObj AS s
+     WHERE p.objID = s.objID AND p.u < 19;
+
      
      -- Equivalent Query
-     SELECT first_name, last_name FROM department, employees WHERE department_id = 10;
+     SELECT p.objID, s.specObjID
+     FROM SpecObj AS s, PhotoObj AS p
+     WHERE p.objID = s.objID AND p.u < 19;
+
      ```
 
 3. **Converting Joins** ("Explicit_Implicit_Joins")
@@ -82,10 +89,16 @@ Due to page limitations in our paper, we were unable to include detailed discuss
    - **Example**:
      ```sql
      -- Original Query
-     SELECT first_name, last_name FROM employees, department WHERE department_id = 10;
-     
+     SELECT p.objID, s.specObjID
+     FROM PhotoObj p, SpecObj s
+     WHERE p.objID = s.objID;
+
+ 
      -- Equivalent Query
-     SELECT e.first_name, e.last_name FROM employees e JOIN departments d ON e.department_id = d.department_id WHERE d.department_id = 10;
+     SELECT p.objID, s.specObjID
+     FROM PhotoObj p
+     JOIN SpecObj s ON p.objID = s.objID;
+
      ```
 
 4. **Using Subqueries** ("Join_Nested", "Condition_Nested")
@@ -93,28 +106,36 @@ Due to page limitations in our paper, we were unable to include detailed discuss
    - **Join to Nested Example**:
      ```sql
      -- Original Query
-     SELECT e.EmployeeName, e.EmployeeID
-     FROM Employees e
-     JOIN Departments d ON e.DepartmentID = d.DepartmentID
-     WHERE d.DepartmentName = 'Sales';
+     SELECT p.objID, p.ra, p.dec
+     PhotoObj p
+     JOIN Field f ON p.fieldID = f.fieldID
+     WHERE f.ra > 250;
+
      
      -- Equivalent Query
-     SELECT EmployeeName, EmployeeID
-     FROM Employees
-     WHERE DepartmentID IN (
-         SELECT DepartmentID
-         FROM Departments
-         WHERE DepartmentName = 'Sales'
-     );
+     SELECT p.objID, p.ra, p.dec
+     FROM PhotoObj p
+     WHERE p.fieldID IN (
+     SELECT fieldID
+     FROM Field
+     WHERE ra > 250);
+
      ```
    - **Condition to Nested Example**:
      ```sql
      -- Original Query
-     SELECT first_name, last_name FROM employees, department WHERE department_id = 10;
+     SELECT objID, ra, dec
+     FROM PhotoObj
+     WHERE fieldID = 100;
+
      
      -- Equivalent Query
-     SELECT first_name, last_name FROM employees WHERE department_id = (SELECT department_id FROM departments WHERE department_id = 10);
+     SELECT objID, ra, dec
+     FROM PhotoObj
+     WHERE fieldID = (SELECT fieldID FROM Field WHERE fieldID = 100);
+
      ```
+
 
 5. **Using Common Table Expressions (CTEs)** ("CTEs")
    - Examines the model's proficiency in utilizing CTEs to organize complex queries.
@@ -140,18 +161,20 @@ Due to page limitations in our paper, we were unable to include detailed discuss
    - **Example**:
      ```sql
      -- Original Query
-     SELECT employee_id, name, department, salary
-     FROM employees
-     WHERE department = 'Sales' OR salary > 50000;
+     SELECT objID
+     FROM PhotoObj
+     WHERE ra < 180 OR ra > 185;
+
      
      -- Equivalent Query
-     SELECT employee_id, name, department, salary
-     FROM employees
-     WHERE department = 'Sales'
+     SELECT objID
+     FROM PhotoObj
+     WHERE ra < 180
      UNION
-     SELECT employee_id, name, department, salary
-     FROM employees
-     WHERE salary > 50000;
+     SELECT objID
+     FROM PhotoObj
+     WHERE ra > 185;
+
      ```
 
 7. **Using EXISTS** ("Condition_EXISTs")
@@ -159,18 +182,20 @@ Due to page limitations in our paper, we were unable to include detailed discuss
    - **Example**:
      ```sql
      -- Original Query
-     SELECT DISTINCT d.department_name
-     FROM departments d
-     JOIN employees e ON d.department_id = e.department_id;
+     SELECT p.objID
+     FROM PhotoObj p
+     JOIN SpecObj s ON p.objID = s.objID
+     WHERE s.z > 0.1;
+
      
      -- Equivalent Query
-     SELECT department_name
-     FROM departments d
+     SELECT objID
+     FROM PhotoObj p
      WHERE EXISTS (
-         SELECT 1
-         FROM employees e
-         WHERE e.department_id = d.department_id
-     );
+     SELECT 1
+     FROM SpecObj s
+     WHERE p.objID = s.objID AND s.z > 0.1);
+
      ```
 
 8. **Using CASE Statements** ("Case_Statement")
@@ -178,25 +203,26 @@ Due to page limitations in our paper, we were unable to include detailed discuss
    - **Example**:
      ```sql
      -- Original Query
-     SELECT p.product_id,
-            p.price,
-            p.category,
-            p.price * (1 - d.discount_rate) AS sale_price
-     FROM products p
-     LEFT JOIN discounts d
-     ON p.category = d.category;
+     SELECT p.objID,
+       p.type,
+       o.priority_modifier,
+       p.magnitude * (1 - o.priority_modifier) AS adjusted_magnitude
+       FROM PhotoObj p
+       LEFT JOIN ObjectTypes o
+       ON p.type = o.type;
+
      
      -- Equivalent Query
-     SELECT product_id,
-            price,
-            category,
-            CASE
-                WHEN category = 'Electronics' THEN price * 0.90  -- 10% discount
-                WHEN category = 'Clothing' THEN price * 0.85     -- 15% discount
-                WHEN category = 'Books' THEN price * 0.80        -- 20% discount
-                ELSE price                                      -- No discount
-            END AS sale_price
-     FROM products;
+     SELECT objID,
+       type,
+       magnitude,
+       CASE
+           WHEN type = 'STAR' THEN magnitude * 0.95  -- Slightly lower priority for stars
+           WHEN type = 'GALAXY' THEN magnitude * 0.90  -- Medium priority for galaxies
+           WHEN type = 'QSO' THEN magnitude * 0.85  -- High priority for quasars
+           ELSE magnitude  -- No adjustment for unknown types
+       END AS adjusted_magnitude FROM PhotoObj;
+
      ```
 
 9. **Simplification and Direct Application** ("Simplification")
@@ -204,25 +230,32 @@ Due to page limitations in our paper, we were unable to include detailed discuss
    - **Example**:
      ```sql
      -- Original Query
-     SELECT * max(salary), min(salary), avg(salary), count(*) 
+     -- Original complex query with a subquery.
+     SELECT MAX(redshift) AS max_redshift,
+       MIN(redshift) AS min_redshift,
+       AVG(redshift) AS avg_redshift,
+       COUNT(*) AS total_count
      FROM (
-         SELECT Name, [Job Title] as job_title, [2010 Gross Earnings] as salary
-         FROM [1314howe].[uw_salaries_2011.txt]
-     ) x 
-     WHERE job_title LIKE '%RESEAR%SR' 
-     AND job_title NOT LIKE '%APL%' 
-     AND salary > 100000 
-     ORDER BY salary desc;
+     SELECT objID, redshift
+     FROM SpecObj
+     WHERE class = 'GALAXY'
+     AND redshift > 0.1
+     AND redshift < 0.3
+     ) x
+     ORDER BY redshift DESC;
+
      
      -- Equivalent Query
-     SELECT MAX(salary) AS max_salary, 
-            MIN(salary) AS min_salary, 
-            AVG(salary) AS avg_salary, 
-            COUNT(*) AS total_count
-     FROM [1314howe].[uw_salaries_2011.txt]
-     WHERE [Job Title] LIKE '%RESEAR%SR' 
-     AND [Job Title] NOT LIKE '%APL%' 
-     AND [2010 Gross Earnings] > 100000;
+     -- Simplified equivalent query.
+     SELECT MAX(redshift) AS max_redshift,
+       MIN(redshift) AS min_redshift,
+       AVG(redshift) AS avg_redshift,
+       COUNT(*) AS total_count
+     FROM SpecObj
+     WHERE class = 'GALAXY'
+     AND redshift > 0.1
+     AND redshift < 0.3;
+
      ```
 
 10. **Reordering the Conditions**
@@ -230,12 +263,16 @@ Due to page limitations in our paper, we were unable to include detailed discuss
     - **Example**:
       ```sql
       -- Original Query
-      SELECT * FROM Orders
-      WHERE CustomerID = 1234 AND OrderDate > '2020-01-01' AND Status = 'Shipped';
+      SELECT objID, ra, dec
+      FROM PhotoObj
+      WHERE objID = 12345 AND ra > 180 AND dec < 0;
+
       
       -- Equivalent Query
-      SELECT * FROM Orders
-      WHERE Status = 'Shipped' AND OrderDate > '2020-01-01' AND CustomerID = 1234;
+      SELECT objID, ra, dec
+      FROM PhotoObj
+      WHERE dec < 0 AND ra > 180 AND objID = 12345;
+
       ```
 
 ## Creating Non-Equivalent Queries
