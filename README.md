@@ -5,7 +5,9 @@ This repository contains all the resources used and generated for our analysis o
 ## Directory and File Descriptions
 
 ### Code
-This directory contains all the scripts and code used to conduct the analyses and generate the results documented in our paper. These scripts cover the evaluation of LLMs across different SQL tasks.
+This directory houses the essential scripts and utilities for our project:
+- **ANTLR**: Contains ANTLR-related files and scripts which are crucial for parsing and analyzing SQL queries.
+- **llms_interaction.ipynb**: A Jupyter notebook that demonstrates the interaction with different language models including GPT-4, GPT-3.5, Llama3, Mistralai, and Gemini, showcasing their handling of various SQL tasks.
 
 ### Datasets
 Here you will find the datasets used in our analysis, including SDSS, SQLShare, and Join-Order. These datasets serve as the basis for evaluating the LLMs' performance on various tasks.
