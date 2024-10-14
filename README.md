@@ -1,42 +1,32 @@
-# Overview
-This repository contains a collection of tools and datasets designed to evaluate the understanding of SQL queries by large language models (LLMs). Our focus is on various aspects of SQL processing, including syntax error detection, missing token identification, query performance prediction, and query equivalence checking.
-### What's inside the repository:
-* ANTLR: Uses ANTLR files for parsing SQL queries to check their syntactic correctness.
-* Codes: Jupyter Notebooks with scripts for syntax error evaluation, missing token identification, and more.
-* Datasets: Includes datasets used for different SQL-related tasks to assess model performance.
-* Stats: Contains statistical analysis files detailing the properties of SQL queries.
-* Queries Equivalence and Syntax Error Types: Documentation on methods for assessing query Equivalence and Types of Sybtax Error.
-### SQL Related Tasks: 
-* Syntax erroridentification: The ability to detect advanced syntax errors that violate structural and semantic requirements rather than
-basic errors (e.g., missing parentheses, quotation marks) shows how much LLMs “understand” SQL. For example, detecting the misalignment of attributes and aggregation functions among SELECT,
-GROUP BY, HAVING clauses, incompatible attribute types between
-outer and inner (sub-)queries, and invalid join operations requires
-a complex “understanding” of the queries.
-* Missing token identification: Identifying missing tokens is a crucial
-pre-step for applications such as query recommendation, where
-missing token imputation and query auto-completion are key functionalities. We evaluate the ability to not only recognize a
-missing token but to identify the precise location and the type of
-missing token (e.g., FeiComment: Can we give examples here of
-the types?).
-* Query performance estimation: Given only the SQL query text,
-accurately estimating its runtime performance is challenging, as
-multiple factors such as the database schema, specific data instances,
-and the query workload all play a role . Using publicly available
-query workloads, recent work has shown that more complex, longer
-queries with multiple joins and multiple predicate conditions incur
-higher execution costs.
-* Query equivalence: Two syntactically different queries are considered equivalent if they return the same result for all database
-instances. This is important for query optimization, and
-query recommendation, where simpler query representations
-can facilitate faster execution times. We evaluate query equivalence
-using labelled, equivalent (positive), and non-equivalent (negative)
-query pairs, where the latter is not as straightforward. 
-* Query explainability: We evaluate LLMs to explain SQL queries
-by describing what a given query returns. This task is similar to
-assessments in code and image understanding, to generate code
-documentation and image captions, respectively, to measure
-understanding. We evaluate over a wide range of complex queries,
-including multiple tables, nested subqueries, and intricate logical
-conditions.
+# SQL Task Evaluation in LLMs
 
+This repository is dedicated to evaluating the capability of Language Learning Models (LLMs) to handle complex SQL tasks. Our research investigates several tasks that showcase an LLM's ability to understand and manipulate SQL queries beyond basic syntax checking.
 
+## SQL Related Tasks
+
+### 1. Syntax Error Identification
+This task assesses the ability of LLMs to identify advanced syntax errors that impact the structure and semantics of SQL queries. Unlike simple mistakes (such as missing parentheses), advanced errors include misalignment of attributes and functions among `SELECT`, `GROUP BY`, `HAVING` clauses, type mismatches in joins, and invalid join operations. This evaluation reflects the depth of an LLM’s SQL "understanding."
+
+### 2. Missing Token Identification
+The ability to identify and precisely locate missing tokens in SQL queries is crucial for query recommendation systems and auto-completion functionalities. This task evaluates not just the recognition but also the pinpointing of the exact type and location of missing tokens, facilitating enhancements in query-building applications.
+
+### 3. Query Performance Estimation
+Estimating the runtime performance of SQL queries based solely on their text is challenging due to influences like database schema, data specifics, and query workload. We explore how well LLMs can predict the execution costs of queries, particularly those that are complex, involve multiple joins, or have several predicate conditions.
+
+### 4. Query Equivalence
+Two queries that yield identical results across all database instances are considered equivalent, crucial for query optimization and recommendation. This task involves evaluating LLMs with labeled query pairs (equivalent and non-equivalent) to determine their effectiveness in recognizing query equivalence, thus aiding in simpler and faster query execution strategies.
+
+### 5. Query Explainability
+We assess LLMs on their ability to explain SQL queries by describing their expected outputs. This task is akin to generating documentation for code or captions for images, measuring the model's depth of understanding. Our evaluation includes a range of complex queries involving multiple tables, nested subqueries, and intricate logical conditions.
+
+## Objectives
+
+The main objective of this repository is to provide a comprehensive suite of SQL tasks that help in evaluating the proficiency of LLMs in understanding and manipulating SQL at an advanced level. These tasks are designed to push the boundaries of what artificial intelligence can achieve in the realm of database querying and management.
+
+## Contributing
+
+Contributors are welcome to suggest improvements, add new tasks, or enhance the evaluation methods for existing tasks. Please fork this repository and submit pull requests with your proposals.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
