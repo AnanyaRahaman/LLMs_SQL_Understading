@@ -55,18 +55,14 @@ Due to page limitations in our paper, we were unable to include detailed discuss
      WHERE objID IN (
      SELECT objID
      FROM PhotoTag
-     WHERE u > 18
-);
-
-     
+     WHERE u > 18);
      -- Equivalent Query
      SELECT objID
      FROM PhotoTag
      WHERE u > 18
      AND objID IN (
      SELECT objID
-     FROM PhotoObj
-);
+     FROM PhotoObj);
 
      ```
 
