@@ -10,7 +10,10 @@ This directory houses the essential scripts and utilities for our project:
 - **llms_interaction.ipynb**: A Jupyter notebook that demonstrates the interaction with different language models including GPT-4, GPT-3.5, Llama3, Mistralai, and Gemini, showcasing their handling of various SQL tasks.
 
 ### Datasets
-Here you will find the datasets used in our analysis, including SDSS, SQLShare, and Join-Order. These datasets serve as the basis for evaluating the LLMs' performance on various tasks.
+This directory contains two folders and a Jupyter notebook:
+- **Stats**: Holds statistical data and analyses relevant to the SQL tasks we evaluated.
+- **Tasks**: Contains datasets and resources specific to each SQL task such as Syntax Error Identification, Missing Token Identification, Performance Prediction, and Query Equivalence.
+- **datasets_stats.ipynb**: A Jupyter notebook that provides detailed statistical evaluations used in our research, analyzing the impact of statistical properties on various SQL tasks.
 
 ### results.ipynb
 This Jupyter notebook presents the results of our analysis, showing the impact of statistical properties on SQL tasks such as Syntax Error Identification, Missing Token Identification, Performance Prediction, and Query Equivalence across different datasets. Results are shown for five LLMs: GPT-4, GPT-3.5, Llama3, Mistralai, and Gemini. While not all figures made it into the paper, those included best illustrate the significant relationships or their absence among the variables studied.
@@ -40,10 +43,3 @@ We assess LLMs on their ability to explain SQL queries by describing their expec
 
 The main objective of this repository is to provide a comprehensive suite of SQL tasks that help in evaluating the proficiency of LLMs in understanding and manipulating SQL at an advanced level. These tasks are designed to push the boundaries of what artificial intelligence can achieve in the realm of database querying and management.
 
-## Contributing
-
-Contributors are welcome to suggest improvements, add new tasks, or enhance the evaluation methods for existing tasks. Please fork this repository and submit pull requests with your proposals.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
