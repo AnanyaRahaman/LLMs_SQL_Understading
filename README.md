@@ -50,22 +50,24 @@ Due to page limitations in our paper, we were unable to include detailed discuss
    - **Example**:
      ```sql
      -- Original Query
-     SELECT customer_id
-     FROM Orders
-     WHERE customer_id IN (
-         SELECT customer_id
-         FROM Customers
-         WHERE country = 'USA'
-     );
+     SELECT objID
+FROM PhotoObj
+WHERE objID IN (
+    SELECT objID
+    FROM PhotoTag
+    WHERE u > 18
+);
+
      
      -- Equivalent Query
-     SELECT customer_id
-     FROM Customers
-     WHERE country = 'USA'
-     AND customer_id IN (
-         SELECT customer_id
-         FROM Orders
-     );
+     SELECT objID
+FROM PhotoTag
+WHERE u > 18
+AND objID IN (
+    SELECT objID
+    FROM PhotoObj
+);
+
      ```
 
 2. **Changing Join Order** ("Join_Order")
