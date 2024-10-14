@@ -1,3 +1,10 @@
+# Overview
+This repository contains a collection of tools and datasets designed to evaluate the understanding of SQL queries by large language models (LLMs). Our focus is on various aspects of SQL processing, including syntax error detection, missing token identification, query performance prediction, and query equivalence checking and SQL to Test Conversion.
+### What's inside the repository:
+* Codes: Jupyter Notebooks with scripts for syntax error evaluation, missing token identification, and more.
+* Datasets: Includes datasets used for different SQL-related tasks to assess model performance.
+
+
 # SQL Task Evaluation in LLMs
 
 This repository is dedicated to evaluating the capability of Language Learning Models (LLMs) to handle complex SQL tasks. Our research investigates several tasks that showcase an LLM's ability to understand and manipulate SQL queries beyond basic syntax checking.
