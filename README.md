@@ -10,9 +10,6 @@ This directory contains all the scripts and code used to conduct the analyses an
 ### Datasets
 Here you will find the datasets used in our analysis, including SDSS, SQLShare, and Join-Order. These datasets serve as the basis for evaluating the LLMs' performance on various tasks.
 
-### README.md
-Provides an overview and general information about the repository's purpose and structure.
-
 ### results.ipynb
 This Jupyter notebook presents the results of our analysis, showing the impact of statistical properties on SQL tasks such as Syntax Error Identification, Missing Token Identification, Performance Prediction, and Query Equivalence across different datasets. Results are shown for five LLMs: GPT-4, GPT-3.5, Llama3, Mistralai, and Gemini. While not all figures made it into the paper, those included best illustrate the significant relationships or their absence among the variables studied.
 
