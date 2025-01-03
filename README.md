@@ -144,7 +144,7 @@ Due to page limitations in our paper, we were unable to include detailed discuss
      -- Original Query
      SELECT text 
      FROM DBObjects 
-     WHERE name = 'PhotoTag'
+     WHERE name = 'PhotoTag';
      
      -- Equivalent Query
      WITH FilteredObjects AS (
@@ -153,7 +153,7 @@ Due to page limitations in our paper, we were unable to include detailed discuss
          WHERE name = 'PhotoTag'
      )
      SELECT text
-     FROM FilteredObjects
+     FROM FilteredObjects;
      ```
 
 6. **Using UNION or INTERSECT ALL** ("Condition_IntersectUnion")
@@ -369,21 +369,17 @@ We also explored generating non-equivalent queries to further challenge the LLMs
 
      ```
 
-7. **Ambiguous Column References and Table Name Changes**
-   - Introduces errors in column references and table names to evaluate error detection capabilities.
-   - **Ambiguous Column References Example**:
+7. **Ambiguous Column References**
+   - Introduces errors in column references to evaluate error detection capabilities.
      ```sql
      -- Original Query
      SELECT objID, ra, dec FROM PhotoObj;
 
-     FROM Employees;
-     
      -- Non Equivalent Query
      SELECT objID, ra FROM PhotoObj;
-
-     FROM Employees;
      ```
 8. - **Change Table Name Example**:
+   - Introduces errors in table names.
      ```sql
      -- Original Query
      SELECT objID, ra FROM PhotoObj;
