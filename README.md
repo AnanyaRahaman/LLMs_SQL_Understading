@@ -68,7 +68,7 @@ Due to page limitations in our paper, we were unable to include detailed discuss
      ```
 
 2. **Changing Join Order** ("Join_Order")
-   - Assesses the model's understanding of join operations by altering the order of tables in the join clause.
+   - This involves altering the order of tables in the join clause.
    - **Example**:
      ```sql
      -- Original Query
@@ -102,8 +102,8 @@ Due to page limitations in our paper, we were unable to include detailed discuss
      ```
 
 4. **Using Subqueries** ("Join_Nested", "Condition_Nested")
-   - Evaluates the model's capability to interchange joins and nested queries to achieve the same result.
    - **Join to Nested Example**:
+   - This involves replacing a join operation with a subquery. 
      ```sql
      -- Original Query
      SELECT p.objID, p.ra, p.dec
@@ -122,6 +122,7 @@ Due to page limitations in our paper, we were unable to include detailed discuss
 
      ```
    - **Condition to Nested Example**:
+   - This technique replaces direct condition checks in the WHERE clause with subqueries. 
      ```sql
      -- Original Query
      SELECT objID, ra, dec
@@ -157,7 +158,7 @@ Due to page limitations in our paper, we were unable to include detailed discuss
      ```
 
 6. **Using UNION or INTERSECT ALL** ("Condition_IntersectUnion")
-   - Tests understanding of set operations and their implications on query results.
+   - This Techniques use set operations and their implications to make equivalent queries.
    - **Example**:
      ```sql
      -- Original Query
@@ -178,7 +179,7 @@ Due to page limitations in our paper, we were unable to include detailed discuss
      ```
 
 7. **Using EXISTS** ("Condition_EXISTs")
-   - Checks the model's ability to handle EXISTS logical operator within subqueries to filter results.
+   - Using EXISTS logical operator within subqueries that can replicate the effects of joins or complex conditions.
    - **Example**:
      ```sql
      -- Original Query
@@ -199,7 +200,7 @@ Due to page limitations in our paper, we were unable to include detailed discuss
      ```
 
 8. **Using CASE Statements** ("Case_Statement")
-   - Assesses the handling of conditional logic within queries to produce dynamic results.
+   - Using conditional logic (CASE and WHEN) within queries to produce equivalent queries.
    - **Example**:
      ```sql
      -- Original Query
@@ -358,7 +359,7 @@ We also explored generating non-equivalent queries to further challenge the LLMs
      ```
 
 6. **Modifying Order By Criteria** ("Order_by_Column")
-   - Adjusts sorting criteria to test the model's understanding of order significance.
+   - Adjusts Order By criteria to test the order significance.
    - **Example**:
      ```sql
      -- Original Query
@@ -378,7 +379,7 @@ We also explored generating non-equivalent queries to further challenge the LLMs
      -- Non Equivalent Query
      SELECT objID, ra FROM PhotoObj;
      ```
-8. - **Change Table Name Example**:
+8. - **Change Table Name**:
    - Introduces errors in table names.
      ```sql
      -- Original Query
